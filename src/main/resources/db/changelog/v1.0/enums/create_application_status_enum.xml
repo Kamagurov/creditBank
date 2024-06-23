@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1.0" author="SKamagurov">
+        <sql>
+            DROP TABLE IF EXISTS application_status CASCADE;
+        </sql>
+        <createTable tableName="application_status">
+            <column name="status" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+        <insert tableName="application_status">
+            <column name="status" value="PREAPPROVAL"/>
+        </insert>
+        <insert tableName="application_status">
+            <column name="status" value="APPROVED"/>
+        </insert>
+        <insert tableName="application_status">
+            <column name="status" value="CC_DENIED"/>
+        </insert>
+        <insert tableName="application_status">
+            <column name="status" value="CC_APPROVED"/>
+        </insert>
+        <insert tableName="application_status">
+            <column name="status" value="PREPARE_DOCUMENTS"/>
+        </insert>
+        <insert tableName="application_status">
+            <column name="status" value="DOCUMENT_CREATED"/>
+        </insert>
+        <insert tableName="application_status">
+            <column name="status" value="CLIENT_DENIED"/>
+        </insert>
+        <insert tableName="application_status">
+            <column name="status" value="DOCUMENT_SIGNED"/>
+        </insert>
+        <insert tableName="application_status">
+            <column name="status" value="CREDIT_ISSUED"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

@@ -1,18 +1,21 @@
-package com.example.creditbank.calculator.entity;
+package com.example.creditbank.deal.model;
 
 import com.example.creditbank.calculator.enums.EmploymentPosition;
 import com.example.creditbank.calculator.enums.EmploymentStatus;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.UUID;
+
 @Data
-@RequiredArgsConstructor
-public class EmploymentEntity {
+public class Employment implements Serializable {
 
-    private EmploymentStatus employmentStatus;
+    private UUID employment_uuid;
 
-    private String employerINN;
+    private EmploymentStatus status;
+
+    private String employmentINN;
 
     private BigDecimal salary;
 
@@ -21,5 +24,4 @@ public class EmploymentEntity {
     private Integer workExperienceTotal;
 
     private Integer workExperienceCurrent;
-
 }

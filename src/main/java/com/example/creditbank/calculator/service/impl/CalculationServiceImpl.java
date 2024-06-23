@@ -170,15 +170,15 @@ public class CalculationServiceImpl implements CalculationService {
                 break;
         }
 
-        var age = getAge(scoringDataDto.getBirthdate());
+        var ageInYears = getAgeInYears(scoringDataDto.getBirthdate());
 
-        if (age < AGE_OF_MAJORITY || age > RETIREMENT_AGE) {
-            throw new ForbiddenException(String.format(AGE_VERIFICATION, age));
+        if (ageInYears < AGE_OF_MAJORITY || ageInYears > RETIREMENT_AGE) {
+            throw new ForbiddenException(String.format(AGE_VERIFICATION, ageInYears));
         }
 
-        if (scoringDataDto.getGender() == Gender.FEMALE && age >= AVERAGE_AGE_OF_A_FEMALE && age <= OLD_AGE_OF_A_FEMALE) {
+        if (scoringDataDto.getGender() == Gender.FEMALE && ageInYears >= AVERAGE_AGE_OF_A_FEMALE && ageInYears <= OLD_AGE_OF_A_FEMALE) {
             baseRate = baseRate.subtract(RATE_CHANGE_BY_3);
-        } else if (scoringDataDto.getGender() == Gender.MALE && age >= AVERAGE_AGE_OF_A_MALE && age <= OLD_AGE_OF_A_MALE) {
+        } else if (scoringDataDto.getGender() == Gender.MALE && ageInYears >= AVERAGE_AGE_OF_A_MALE && ageInYears <= OLD_AGE_OF_A_MALE) {
             baseRate = baseRate.subtract(RATE_CHANGE_BY_3);
         } else if (!scoringDataDto.getGender().equals(Gender.MALE) &&!scoringDataDto.getGender().equals(Gender.FEMALE)) {
             baseRate = baseRate.add(RATE_CHANGE_BY_7);
@@ -206,7 +206,7 @@ public class CalculationServiceImpl implements CalculationService {
                 .pow(2);
     }
 
-    private int getAge(LocalDate birthdate) {
+    private int getAgeInYears(LocalDate birthdate) {
         if (birthdate!= null) {
             return Period.between(birthdate, LocalDate.now()).getYears();
         } else {

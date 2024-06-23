@@ -1,0 +1,201 @@
+openapi: 3.0.0
+info:
+  title: Кредитный калькулятор API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /deal/statement:
+    post:
+      summary: Расчёт возможных условий кредита
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanStatementRequestDto'
+      responses:
+        '200':
+          description: Список предложений по кредиту
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LoanOfferDto'
+
+  /deal/offer/select:
+    post:
+      summary: Выбор одного из предложений
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanOfferDto'
+      responses:
+        '204':
+          description: Операция выполнена успешно
+
+  /deal/calculate/{statementId}:
+    post:
+      summary: Завершение регистрации и полный расчёт кредита
+      parameters:
+        - name: statementId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinishRegistrationRequestDto'
+      responses:
+        '204':
+          description: Операция выполнена успешно
+
+components:
+  schemas:
+    LoanStatementRequestDto:
+      type: object
+      properties:
+        amount:
+          type: string
+          format: double
+        term:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleName:
+          type: string
+        email:
+          type: string
+        birthdate:
+          type: string
+          format: date
+        passportSeries:
+          type: string
+        passportNumber:
+          type: string
+      required:
+        - amount
+        - term
+        - firstName
+        - lastName
+        - middleName
+        - email
+        - birthdate
+        - passportSeries
+        - passportNumber
+    LoanOfferDto:
+      type: object
+      properties:
+        statementId:
+          type: string
+          format: uuid
+        requestedAmount:
+          type: string
+          format: double
+        totalAmount:
+          type: string
+          format: double
+        term:
+          type: integer
+        monthlyPayment:
+          type: string
+          format: double
+        rate:
+          type: string
+          format: double
+        isInsuranceEnabled:
+          type: boolean
+        isSalaryClient:
+          type: boolean
+      required:
+        - statementId
+        - requestedAmount
+        - totalAmount
+        - term
+        - monthlyPayment
+        - rate
+        - isInsuranceEnabled
+        - isSalaryClient
+    FinishRegistrationRequestDto:
+      type: object
+      properties:
+        gender:
+          type: string
+          enum: [ "MALE", "FEMALE", "NON_BINARY" ]
+        maritalStatus:
+          type: string
+          enum: [ "SINGLE", "DIVORCED", "MARRIED" ]
+        dependentAmount:
+          type: integer
+        passportIssueDate:
+          type: string
+          format: date
+        passportIssueBranch:
+          type: string
+        employment:
+          $ref: '#/components/schemas/EmploymentDto'
+        accountNumber:
+          type: string
+      required:
+        - gender
+        - maritalStatus
+        - dependentAmount
+        - passportIssueDate
+        - passportIssueBranch
+        - employment
+        - accountNumber
+    EmploymentDto:
+      type: object
+      properties:
+        employmentUuid:
+          type: string
+          format: uuid
+        status:
+          type: string
+          enum: [ "CALCULATED", "ISSUED" ]
+        employmentINN:
+          type: string
+        salary:
+          type: string
+          format: double
+        position:
+          type: string
+          enum: [ "MID_MANAGER", "TOP_MANAGER", "WORKER" ]
+        workExperienceTotal:
+          type: integer
+        workExperienceCurrent:
+          type: integer
+      required:
+        - employmentUuid
+        - status
+        - employmentINN
+        - salary
+        - position
+        - workExperienceTotal
+        - workExperienceCurrent
+    StatementStatusHistoryDto:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [ "PREAPPROVAL", "APPROVAL", "CC_DENIED",
+                  "CC_APPROVED", "PREPARE_DOCUMENTS", "DOCUMENTS_CREATED",
+                  "CLIENT_DENIED", "DOCUMENT_SIGNED", "CREDIT_ISSUED" ]
+        time:
+          type: string
+          format: date-time
+        changeType:
+          type: string
+          enum: [ "AUTOMATIC", "MANUAL" ]
+      required:
+        - status
+        - time
+        - changeType

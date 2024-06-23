@@ -18,20 +18,20 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping(name = "/calculator")
+@RequestMapping(path = "/calculator")
 @RequiredArgsConstructor
 public class CalculationController {
 
-    final private CalculationService calculationService;
+    private final CalculationService calculationService;
 
-    @PostMapping(value = "/offers",
+    @PostMapping(path = "/offers",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<LoanOfferDto>> createOffers(@RequestBody LoanStatementRequestDto loanStatementRequestDto) {
         return ResponseEntity.ok(calculationService.createOffers(loanStatementRequestDto));
     }
 
-    @PostMapping(value = "/calc",
+    @PostMapping(path = "/calc",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<CreditDto> calculateCredit(@RequestBody ScoringDataDto scoringDataDto) {
