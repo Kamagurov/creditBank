@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum Gender {
 
     MALE("Мужчина"),
-    FEMALE("Женщина");
+    FEMALE("Женщина"),
+    NON_BINARY("Не бинарный");
 
     private final String gender;
 

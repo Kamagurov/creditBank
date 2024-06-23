@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1.5" author="SKamagurov">
+        <sql>
+            DROP TABLE IF EXISTS gender CASCADE;
+        </sql>
+        <createTable tableName="gender">
+            <column name="gender" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+        <insert tableName="gender">
+            <column name="gender" value="MALE"/>
+        </insert>
+        <insert tableName="gender">
+            <column name="gender" value="FEMALE"/>
+        </insert>
+        <insert tableName="gender">
+            <column name="gender" value="NON_BINARY"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

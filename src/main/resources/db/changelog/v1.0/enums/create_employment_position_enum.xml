@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="1.3" author="Skamagurov">
+        <sql>
+            DROP TABLE IF EXISTS employment_position CASCADE;
+        </sql>
+        <createTable tableName="employment_position">
+            <column name="position" type="varchar(50)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+        </createTable>
+        <insert tableName="employment_position">
+            <column name="position" value="WORKER"/>
+        </insert>
+        <insert tableName="employment_position">
+            <column name="position" value="MID_MANAGER"/>
+        </insert>
+        <insert tableName="employment_position">
+            <column name="position" value="TOP_MANAGER"/>
+        </insert>
+        <insert tableName="employment_position">
+            <column name="position" value="OWNER"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

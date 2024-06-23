@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+           http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet id="2.1" author="SKamagurov">
+        <sql>
+            DROP TABLE IF EXISTS employment CASCADE;
+        </sql>
+        <createTable tableName="employment">
+            <column name="employment_uuid" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="status" type="varchar(255)"/>
+            <column name="employer_inn" type="varchar(255)"/>
+            <column name="salary" type="decimal"/>
+            <column name="position" type="varchar(255)"/>
+            <column name="work_experience_total" type="int"/>
+            <column name="work_experience_current" type="int"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

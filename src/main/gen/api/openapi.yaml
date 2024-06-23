@@ -1,0 +1,262 @@
+openapi: 3.0.0
+info:
+  title: Credit Bank API
+  version: 1.0.0
+servers:
+- url: http://localhost:8080
+paths:
+  /deal/statement:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanStatementRequestDto'
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/LoanOfferDto'
+                type: array
+          description: Список предложений по кредиту
+      summary: Расчёт возможных условий кредита
+      x-content-type: application/json
+      x-accepts: application/json
+  /deal/offer/select:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoanOfferDto'
+        required: true
+      responses:
+        "204":
+          description: Операция выполнена успешно
+      summary: Выбор одного из предложений
+      x-content-type: application/json
+      x-accepts: application/json
+  /deal/calculate/{statementId}:
+    post:
+      parameters:
+      - explode: false
+        in: path
+        name: statementId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinishRegistrationRequestDto'
+        required: true
+      responses:
+        "204":
+          description: Операция выполнена успешно
+      summary: Завершение регистрации и полный расчёт кредита
+      x-content-type: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    LoanStatementRequestDto:
+      example:
+        passportNumber: passportNumber
+        firstName: firstName
+        lastName: lastName
+        amount: amount
+        birthdate: 2000-01-23
+        term: 0
+        middleName: middleName
+        passportSeries: passportSeries
+        email: email
+      properties:
+        amount:
+          format: double
+          type: string
+        term:
+          type: integer
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleName:
+          type: string
+        email:
+          type: string
+        birthdate:
+          format: date
+          type: string
+        passportSeries:
+          type: string
+        passportNumber:
+          type: string
+      required:
+      - amount
+      - birthdate
+      - email
+      - firstName
+      - lastName
+      - middleName
+      - passportNumber
+      - passportSeries
+      - term
+      type: object
+    LoanOfferDto:
+      example:
+        totalAmount: totalAmount
+        isSalaryClient: true
+        monthlyPayment: monthlyPayment
+        rate: rate
+        statementId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        requestedAmount: requestedAmount
+        term: 0
+        isInsuranceEnabled: true
+      properties:
+        statementId:
+          format: uuid
+          type: string
+        requestedAmount:
+          format: double
+          type: string
+        totalAmount:
+          format: double
+          type: string
+        term:
+          type: integer
+        monthlyPayment:
+          format: double
+          type: string
+        rate:
+          format: double
+          type: string
+        isInsuranceEnabled:
+          type: boolean
+        isSalaryClient:
+          type: boolean
+      required:
+      - isInsuranceEnabled
+      - isSalaryClient
+      - monthlyPayment
+      - rate
+      - requestedAmount
+      - statementId
+      - term
+      - totalAmount
+      type: object
+    FinishRegistrationRequestDto:
+      example:
+        dependentAmount: 0
+        gender: MALE
+        passportIssueBranch: passportIssueBranch
+        passportIssueDate: 2000-01-23
+        employment:
+          employmentINN: employmentINN
+          employmentUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          workExperienceCurrent: 1
+          position: MANAGER
+          workExperienceTotal: 6
+          salary: salary
+          status: ACTIVE
+        accountNumber: accountNumber
+        maritalStatus: SINGLE
+      properties:
+        gender:
+          enum:
+          - MALE
+          - FEMALE
+          type: string
+        maritalStatus:
+          enum:
+          - SINGLE
+          - MARRIED
+          type: string
+        dependentAmount:
+          type: integer
+        passportIssueDate:
+          format: date
+          type: string
+        passportIssueBranch:
+          type: string
+        employment:
+          $ref: '#/components/schemas/EmploymentDto'
+        accountNumber:
+          type: string
+      required:
+      - accountNumber
+      - dependentAmount
+      - employment
+      - gender
+      - maritalStatus
+      - passportIssueBranch
+      - passportIssueDate
+      type: object
+    EmploymentDto:
+      example:
+        employmentINN: employmentINN
+        employmentUuid: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        workExperienceCurrent: 1
+        position: MANAGER
+        workExperienceTotal: 6
+        salary: salary
+        status: ACTIVE
+      properties:
+        employmentUuid:
+          format: uuid
+          type: string
+        status:
+          enum:
+          - ACTIVE
+          - INACTIVE
+          type: string
+        employmentINN:
+          type: string
+        salary:
+          format: double
+          type: string
+        position:
+          enum:
+          - MANAGER
+          - ENGINEER
+          - SALES
+          type: string
+        workExperienceTotal:
+          type: integer
+        workExperienceCurrent:
+          type: integer
+      required:
+      - employmentINN
+      - employmentUuid
+      - position
+      - salary
+      - status
+      - workExperienceCurrent
+      - workExperienceTotal
+      type: object
+    StatementStatusHistoryDto:
+      properties:
+        status:
+          enum:
+          - PENDING
+          - APPROVED
+          - REJECTED
+          type: string
+        time:
+          format: date-time
+          type: string
+        changeType:
+          enum:
+          - CREATED
+          - UPDATED
+          - DELETED
+          type: string
+      required:
+      - changeType
+      - status
+      - time
+      type: object
+
