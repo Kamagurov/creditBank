@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -42,11 +43,8 @@ public class DealServiceImpl implements DealService {
 
     @Override
     public List<LoanOfferDto> appProcessing(LoanStatementRequestDto loanStatementRequestDto) {
-
-        var client = clientRepository.save(clientMapper.createClient(loanStatementRequestDto, null));
-
+        var client = clientRepository.save(clientMapper.createClientEntity(loanStatementRequestDto, null));
         var statement = statementRepository.save(statementMapper.createStatementEntity(loanStatementRequestDto, client));
-
         List<LoanOfferDto> offers = calculatorClient.createOffers(loanStatementRequestDto).getBody();
 
         for (LoanOfferDto offer : Objects.requireNonNull(offers)) {
@@ -68,14 +66,13 @@ public class DealServiceImpl implements DealService {
         var statusHistory = statusHistoriesMapper.createStatusHistory(statement.getStatus().getApplicationStatus(), null);
 
         statement.setStatusHistories(statusHistoriesMapper.createStatusHistories(statusHistory));
-
         statement.setAppliedOffer(loanOfferDto);
 
         statementRepository.save(statement);
     }
 
     @Override
-    public void registerAndFullCreditCalculation(FinishRegistrationRequestDto finishRegistrationRequestDto, String statementId) {
+    public  void registerAndFullCreditCalculation(FinishRegistrationRequestDto finishRegistrationRequestDto, String statementId) {
         var statement = statementRepository.findStatementEntitiesByStatementId(UUID.fromString(statementId)).orElseThrow();
         var client = clientRepository.findClientEntityByClientId(statement.getClientId()).orElseThrow();
         var credit = creditRepository.findCreditEntityByCreditId(statement.getCreditId()).orElseThrow();
@@ -87,11 +84,11 @@ public class DealServiceImpl implements DealService {
                 .lastName(client.getLastName())
                 .middleName(client.getMiddleName())
                 .gender(client.getGender())
-                .birthdate(client.getBirthDate())
+                .birthdate(LocalDate.from(client.getBirthDate()))
                 .passportSeries(client.getPassportId().getSeries())
                 .passportNumber(client.getPassportId().getNumber())
                 .passportIssueBranch(client.getPassportId().getIssueBranch())
-                .passportIssueDate(client.getPassportId().getIssueDate())
+                .passportIssueDate(LocalDate.from(client.getPassportId().getIssueDate()))
                 .maritalStatus(client.getMaritalStatus())
                 .dependentAmount(client.getDependentAmount())
                 .employmentDto(List.of(EmploymentDto.builder()

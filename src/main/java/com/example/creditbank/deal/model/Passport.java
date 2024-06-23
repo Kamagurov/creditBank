@@ -3,7 +3,7 @@ package com.example.creditbank.deal.model;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class Passport implements Serializable {
@@ -14,5 +14,5 @@ public class Passport implements Serializable {
 
     private String issueBranch;
 
-    private LocalDate issueDate;
+    private LocalDateTime issueDate;
 }

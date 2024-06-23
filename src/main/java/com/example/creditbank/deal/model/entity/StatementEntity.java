@@ -10,7 +10,7 @@ import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +20,7 @@ import java.util.UUID;
 public class StatementEntity {
 
     @Id
-    @Column(name = "statement_id", nullable = false)
+    @Column(name = "statement_id")
     @GeneratedValue
     @UuidGenerator
     private UUID statementId;
@@ -38,14 +38,14 @@ public class StatementEntity {
     private ApplicationStatus status;
 
     @Column(name = "creation_date")
-    private LocalDate creationDate;
+    private LocalDateTime creationDate;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "applied_offer", columnDefinition = "jsonb")
     private LoanOfferDto appliedOffer;
 
     @Column(name = "sign_date")
-    private LocalDate signDate;
+    private LocalDateTime signDate;
 
     @Column(name = "ses_code")
     private BigDecimal sesCode;

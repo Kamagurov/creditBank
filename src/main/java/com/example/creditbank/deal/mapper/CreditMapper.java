@@ -3,6 +3,7 @@ package com.example.creditbank.deal.mapper;
 import com.example.creditbank.deal.enums.CreditStatus;
 import com.example.creditbank.deal.model.dto.CreditDto;
 import com.example.creditbank.deal.model.entity.CreditEntity;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class CreditMapper {
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public CreditEntity toEntity(CreditDto creditDto) {
         return modelMapper.map(creditDto, CreditEntity.class);

@@ -15,9 +15,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 class CalculationServiceImplTest {
@@ -35,10 +36,10 @@ class CalculationServiceImplTest {
                 .middleName("MK")
                 .term(10)
                 .gender(Gender.MALE)
-                .birthdate(LocalDate.of(1990, 10, 10))
+                .birthdate(LocalDateTime.of(1990, 10, 10, 10, 10))
                 .passportSeries("896532")
                 .passportNumber("458798")
-                .passportIssueDate(LocalDate.of(2010, 2, 2))
+                .passportIssueDate(LocalDateTime.of(2010, 2, 2, 2, 2))
                 .passportIssueBranch("ОУФМС")
                 .maritalStatus(MaritalStatus.SINGLE)
                 .dependentAmount(1000)
@@ -72,7 +73,7 @@ class CalculationServiceImplTest {
                 .firstName("Lana")
                 .lastName("Nala")
                 .middleName("LN")
-                .birthdate(LocalDate.of(2000, 5, 5))
+                .birthdate(LocalDateTime.of(2000, 5, 5, 5, 5))
                 .email("sjkdfhsjd@ldkjfh.ru")
                 .passportSeries("457898")
                 .passportNumber("452165")

@@ -8,7 +8,7 @@ import com.example.creditbank.deal.model.Passport;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Builder
 @Data
@@ -20,7 +20,7 @@ public class ClientDto {
 
     private String middleName;
 
-    private LocalDate birthDate;
+    private LocalDateTime birthDate;
 
     private String email;
 

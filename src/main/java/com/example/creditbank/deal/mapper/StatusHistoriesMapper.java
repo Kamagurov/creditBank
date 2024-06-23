@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -14,12 +16,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StatusHistoriesMapper {
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public StatusHistory createStatusHistory(String status, ChangeType changeType) {
         return StatusHistory.builder()
                 .status(status)
-                .time(null)
+                .time(LocalDateTime.now())
                 .changeType(changeType)
                 .build();
     }

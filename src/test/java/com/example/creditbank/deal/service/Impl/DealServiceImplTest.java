@@ -1,11 +1,20 @@
 //package com.example.creditbank.deal.service.Impl;
 //
+//import com.example.creditbank.calculator.dto.EmploymentDto;
 //import com.example.creditbank.calculator.dto.LoanOfferDto;
 //import com.example.creditbank.calculator.dto.LoanStatementRequestDto;
+//import com.example.creditbank.calculator.dto.ScoringDataDto;
+//import com.example.creditbank.calculator.enums.EmploymentPosition;
+//import com.example.creditbank.calculator.enums.EmploymentStatus;
+//import com.example.creditbank.calculator.enums.Gender;
+//import com.example.creditbank.calculator.enums.MaritalStatus;
+//import com.example.creditbank.deal.enums.CreditStatus;
 //import com.example.creditbank.deal.feignclient.CalculatorClient;
 //import com.example.creditbank.deal.mapper.ClientMapper;
 //import com.example.creditbank.deal.mapper.CreditMapper;
 //import com.example.creditbank.deal.mapper.StatementMapper;
+//import com.example.creditbank.deal.model.dto.ClientDto;
+//import com.example.creditbank.deal.model.dto.CreditDto;
 //import com.example.creditbank.deal.model.dto.FinishRegistrationRequestDto;
 //import com.example.creditbank.deal.model.entity.CreditEntity;
 //import com.example.creditbank.deal.model.entity.StatementEntity;
@@ -13,6 +22,7 @@
 //import com.example.creditbank.deal.repositories.CreditRepository;
 //import com.example.creditbank.deal.repositories.StatementRepository;
 //import com.example.creditbank.deal.service.impl.DealServiceImpl;
+//import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.extension.ExtendWith;
 //import org.mockito.InjectMocks;
@@ -52,7 +62,25 @@
 //    private DealServiceImpl dealService;
 //
 //    @Test
+//    @DisplayName("Расчет возможных условий кредита")
 //    void appProcessingTest() {
+//        LoanStatementRequestDto loanStatementRequestDto = getLoanStatementRequestDto();
+//        var clientDto = ClientDto.builder()
+//                .firstName(loanStatementRequestDto.getFirstName())
+//                .lastName(loanStatementRequestDto.getLastName())
+//                .middleName(loanStatementRequestDto.getMiddleName())
+//                .birthDate(loanStatementRequestDto.getBirthdate())
+//                .email(loanStatementRequestDto.getEmail())
+//                .gender(null)
+//                .maritalStatus(null)
+//                .dependentAmount(loanStatementRequestDto.getAmount().intValue())
+//                .employment(null)
+//                .passport(null)
+//                .accountNumber(null)
+//                .build();
+//    }
+//    @Test
+//    void appProcessingTest1() {
 //        LoanStatementRequestDto loanStatementRequestDto = getLoanStatementRequestDto();
 //
 //        List<LoanOfferDto> loanOfferDtos = calculatorClient.createOffers(loanStatementRequestDto).getBody();
@@ -100,12 +128,41 @@
 //
 //        var client = clientMapper.createClient(getLoanStatementRequestDto(), null);
 //
+//        var scoringDataDto = ScoringDataDto.builder()
+//                .amount(BigDecimal.valueOf(500000))
+//                .term(20)
+//                .firstName("Name")
+//                .lastName("LastName")
+//                .middleName("Middle")
+//                .gender(Gender.MALE)
+//                .birthdate(LocalDate.of(2000, 10, 10))
+//                .passportSeries("458745")
+//                .passportNumber("548745")
+//                .passportIssueBranch("true")
+//                .passportIssueDate(LocalDate.of(2018, 10, 15))
+//                .maritalStatus(MaritalStatus.SINGLE)
+//                .dependentAmount(500000)
+//                .employmentDto(List.of(EmploymentDto.builder()
+//                        .employmentStatus(EmploymentStatus.SELF_EMPLOYED)
+//                        .employerINN("54784587458745")
+//                        .salary(BigDecimal.valueOf(150000))
+//                        .position(EmploymentPosition.WORKER)
+//                        .workExperienceTotal(25)
+//                        .workExperienceCurrent(25)
+//                        .build()))
+//                .accountNumber("1245ds98")
+//                .isInsuranceEnabled(true)
+//                .isSalaryClient(true)
+//                .build();
+//
+//        var creditDto = calculatorClient.calculateCredit(scoringDataDto).getBody();
+//
 //        when(statementRepository.findStatementEntitiesByStatementId(UUID.fromString(statementId)))
 //                .thenReturn(Optional.of(statementMapper.createStatementEntity(getLoanStatementRequestDto(), client)));
 //        when(clientRepository.findClientEntityByClientId(any()))
 //                .thenReturn(Optional.of(clientMapper.createClient(getLoanStatementRequestDto(), null)));
 //        when(creditRepository.findCreditEntityByCreditId(any()))
-//                .thenReturn(Optional.of(clientMapper.createClient(getLoanStatementRequestDto(), null));
+//                .thenReturn(Optional.of(creditMapper.createCreditEntity(creditMapper.toEntity(creditDto), null)));
 //
 //        dealService.registerAndFullCreditCalculation(registrationDto, statementId);
 //

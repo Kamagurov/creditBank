@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class ClientMapper {
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public ClientEntity toEntity(ClientDto clientDto) {
         return modelMapper.map(clientDto, ClientEntity.class);
@@ -22,12 +22,12 @@ public class ClientMapper {
         return modelMapper.map(client, ClientDto.class);
     }
 
-    public ClientEntity createClient(LoanStatementRequestDto loanStatementRequestDto, FinishRegistrationRequestDto finishRegistrationRequestDto) {
+    public ClientEntity createClientEntity(LoanStatementRequestDto loanStatementRequestDto, FinishRegistrationRequestDto finishRegistrationRequestDto) {
         return toEntity(ClientDto.builder()
                 .firstName(loanStatementRequestDto.getFirstName())
                 .lastName(loanStatementRequestDto.getLastName())
                 .middleName(loanStatementRequestDto.getMiddleName())
-                .birthDate(loanStatementRequestDto.getBirthdate())
+                .birthDate(loanStatementRequestDto.getBirthdate().atStartOfDay())
                 .email(loanStatementRequestDto.getEmail())
                 .gender(null)
                 .maritalStatus(null)

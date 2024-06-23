@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class StatementMapper {
 
-    private ModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public StatementEntity toEntity(StatementDto statementDto) {
         return modelMapper.map(statementDto, StatementEntity.class);

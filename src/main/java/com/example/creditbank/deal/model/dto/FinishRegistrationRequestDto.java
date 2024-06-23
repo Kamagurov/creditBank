@@ -5,7 +5,7 @@ import com.example.creditbank.calculator.enums.Gender;
 import com.example.creditbank.calculator.enums.MaritalStatus;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 public class FinishRegistrationRequestDto {
@@ -16,7 +16,7 @@ public class FinishRegistrationRequestDto {
 
     private Integer dependentAmount;
 
-    private LocalDate passportIssueDate;
+    private LocalDateTime passportIssueDate;
 
     private EmploymentDto employment;
 

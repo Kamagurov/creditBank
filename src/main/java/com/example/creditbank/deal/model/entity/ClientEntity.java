@@ -12,6 +12,7 @@ import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -26,19 +27,19 @@ public class ClientEntity {
     @UuidGenerator
     private UUID clientId;
 
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "middle_name", nullable = false)
+    @Column(name = "middle_name")
     private String middleName;
 
-    @Column(name = "birth_date", nullable = false)
-    private LocalDate birthDate;
+    @Column(name = "birth_date")
+    private LocalDateTime birthDate;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
     @Column(name = "gender")
@@ -57,7 +58,7 @@ public class ClientEntity {
     private Passport passportId;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "employment_id", columnDefinition = "jsonb")
+    @Column(name = "employment", columnDefinition = "jsonb")
     private Employment employmentId;
 
     @Column(name = "account_number")
