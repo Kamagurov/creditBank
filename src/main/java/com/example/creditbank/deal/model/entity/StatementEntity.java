@@ -26,11 +26,9 @@ public class StatementEntity {
     private UUID statementId;
 
     @JoinColumn(name = "credit_id")
-    @UuidGenerator
     private UUID creditId;
 
     @JoinColumn(name = "client_id")
-    @UuidGenerator
     private UUID clientId;
 
     @Column(name = "status")
