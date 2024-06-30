@@ -5,6 +5,7 @@ import com.example.creditbank.calculator.dto.LoanOfferDto;
 import com.example.creditbank.calculator.dto.LoanStatementRequestDto;
 import com.example.creditbank.calculator.dto.ScoringDataDto;
 import com.example.creditbank.calculator.service.CalculationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -27,7 +28,7 @@ public class CalculationController {
     @PostMapping(path = "/offers",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<LoanOfferDto>> createOffers(@RequestBody LoanStatementRequestDto loanStatementRequestDto) {
+    public ResponseEntity<List<LoanOfferDto>> createOffers(@Valid @RequestBody LoanStatementRequestDto loanStatementRequestDto) {
         return ResponseEntity.ok(calculationService.createOffers(loanStatementRequestDto));
     }
 

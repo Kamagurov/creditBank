@@ -77,6 +77,7 @@ public class CalculationServiceImpl implements CalculationService {
         var monthlyPayment = calculateMonthlyPayment(totalAmount, term, rate);
 
         return LoanOfferDto.builder()
+                .statementId(UUID.randomUUID())
                 .requestedAmount(requestedAmount)
                 .totalAmount(totalAmount)
                 .term(term)

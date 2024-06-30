@@ -3,8 +3,7 @@ package com.example.creditbank.calculator.dto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Generated;
-import nonapi.io.github.classgraph.json.Id;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.math.BigDecimal;
 import java.util.UUID;

@@ -21,7 +21,7 @@
             </column>
             <column name="middle_name" type="varchar(255)">
             </column>
-            <column name="birth_date" type="date">
+            <column name="birth_date" type="timestamp(6)">
             </column>
             <column name="email" type="varchar(255)">
             </column>
