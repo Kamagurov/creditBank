@@ -46,7 +46,7 @@ public class StatementEntity {
     private LocalDateTime signDate;
 
     @Column(name = "ses_code")
-    private BigDecimal sesCode;
+    private Integer sesCode;
 
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name = "status_history", columnDefinition = "jsonb")

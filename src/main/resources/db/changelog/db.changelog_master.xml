@@ -11,5 +11,6 @@
     <include file="/db/changelog/v1.0/tables/v1.0_04_create_client_table.xml"/>
     <include file="/db/changelog/v1.0/tables/v1.0_05_create_credit_table.xml"/>
     <include file="/db/changelog/v1.0/tables/v1.0_06_create_statement_table.xml"/>
+    <include file="/db/changelog/v1.0/tables/v1.0_07_create_finish_registration_request_table.xml"/>
 
 </databaseChangeLog>

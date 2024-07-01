@@ -9,6 +9,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -32,10 +33,10 @@ public class FinishRegistrationRequestEntity {
     private Integer dependentAmount;
 
     @Column(name = "passport_issue_date")
-    private LocalDate passportIssueDate;
+    private LocalDateTime passportIssueDate;
 
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "employment_id", columnDefinition = "jsonb")
+    @Column(name = "employment", columnDefinition = "jsonb")
     private EmploymentDto employment;
 
     @Column(name = "account_number")

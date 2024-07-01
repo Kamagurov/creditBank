@@ -16,16 +16,14 @@
             <constraints primaryKey="true" unique="true"/>
         </column>
         <column name="client_id" type="uuid">
-            <constraints nullable="false"/>
         </column>
         <column name="credit_id" type="uuid">
-            <constraints nullable="false"/>
         </column>
         <column name="status" type="varchar(255)"/>
         <column name="creation_date" type="timestamp"/>
         <column name="applied_offer" type="jsonb"/>
         <column name="sign_date" type="timestamp"/>
-        <column name="ses_code" type="varchar(255)"/>
+        <column name="ses_code" type="integer"/>
         <column name="status_history" type="jsonb"/>
     </createTable>
 

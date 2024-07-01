@@ -1,4 +1,4 @@
-package com.example.creditbank.calculator.service.impl;
+package com.example.creditbank.calculator.service;
 
 import com.example.creditbank.calculator.dto.EmploymentDto;
 import com.example.creditbank.calculator.dto.LoanStatementRequestDto;
@@ -7,7 +7,6 @@ import com.example.creditbank.calculator.enums.EmploymentPosition;
 import com.example.creditbank.calculator.enums.EmploymentStatus;
 import com.example.creditbank.calculator.enums.Gender;
 import com.example.creditbank.calculator.enums.MaritalStatus;
-import com.example.creditbank.calculator.service.CalculationService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -36,10 +34,10 @@ class CalculationServiceImplTest {
                 .middleName("MK")
                 .term(10)
                 .gender(Gender.MALE)
-                .birthdate(LocalDateTime.of(1990, 10, 10, 10, 10))
+                .birthdate(LocalDate.of(1990, 10, 10))
                 .passportSeries("896532")
                 .passportNumber("458798")
-                .passportIssueDate(LocalDateTime.of(2010, 2, 2, 2, 2))
+                .passportIssueDate(LocalDate.of(2010, 2, 2))
                 .passportIssueBranch("ОУФМС")
                 .maritalStatus(MaritalStatus.SINGLE)
                 .dependentAmount(1000)
@@ -73,7 +71,7 @@ class CalculationServiceImplTest {
                 .firstName("Lana")
                 .lastName("Nala")
                 .middleName("LN")
-                .birthdate(LocalDateTime.of(2000, 5, 5, 5, 5))
+                .birthdate(LocalDate.of(2000, 5, 5))
                 .email("sjkdfhsjd@ldkjfh.ru")
                 .passportSeries("457898")
                 .passportNumber("452165")

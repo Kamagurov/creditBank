@@ -23,7 +23,7 @@
         <liquibase-core.version>4.24.0</liquibase-core.version>
         <hibernate-core.version>6.5.2.Final</hibernate-core.version>
         <spring-cloud-starter-openfieign.version>4.1.2</spring-cloud-starter-openfieign.version>
-<!--        <hypersistence-utils-hibernate-55.version>3.7.0</hypersistence-utils-hibernate-55.version>-->
+        <jakarta-validation-api.version>3.0.2</jakarta-validation-api.version>
     </properties>
     <dependencies>
         <dependency>
@@ -53,12 +53,24 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
             <version>${junit-jupiter-api.version}</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <version>${jakarta-validation-api.version}</version>
         </dependency>
 
         <!--        <dependency>-->
