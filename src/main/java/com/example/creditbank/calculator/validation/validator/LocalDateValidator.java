@@ -11,43 +11,21 @@ public class LocalDateValidator implements ConstraintValidator<LocalDateValidati
 
     @Override
     public boolean isValid(LocalDate date, ConstraintValidatorContext context) {
-        if (date == null) {
-            return true;
-        }
-
-        if (date.isBefore(LocalDate.of(1, 1, 1))) {
+        if (date == null || date.isBefore(LocalDate.of(1, 1, 1))) {
             return false;
         }
 
         LocalDate now = LocalDate.now();
-
         Period period = Period.between(date, now);
-
-        if (period.getYears() < 18) {
+        if (period.getYears() < 18 || date.getMonthValue() < 1 || date.getMonthValue() > 12) {
             return false;
         }
 
-        if (date.getMonthValue() < 1 || date.getMonthValue() > 12) {
+        int maxDayOfMonth = date.getMonthValue() == 2 && date.isLeapYear()? 29 : 28;
+
+        if (date.getDayOfMonth() > maxDayOfMonth) {
             return false;
         }
-        switch (date.getMonthValue()) {
-            case 2:
-                if (date.getDayOfMonth() > 28) {
-                    return false;
-                }
-                break;
-            case 4, 6, 9, 11:
-                if (date.getDayOfMonth() > 30) {
-                    return false;
-                }
-                break;
-            case 1, 3, 5, 7, 8, 10, 12:
-                if (date.getDayOfMonth() > 31) {
-                    return false;
-                }
-                break;
-        }
-
         return true;
     }
 }

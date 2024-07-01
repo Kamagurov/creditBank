@@ -16,11 +16,11 @@ import java.time.LocalDate;
 public class LoanStatementRequestDto {
 
     @Schema(description = "Сумма кредита")
-    @DecimalMin(message = "Сумма кредита должна быть большее или равна 30 000.", value = "30000")
+    @DecimalMin(message = "Сумма кредита должна быть большее 30 000.", value = "30000")
     private BigDecimal amount;
 
     @Schema(description = "Срок кредита")
-    @Min(message = "Срок кредита должен быть большее или равен 6 (в месяцах).", value = 6)
+    @Min(message = "Срок кредита должен быть большее 6 (в месяцах).", value = 6)
     private Integer term;
 
     @Schema(description = "Имя", example = "Петр")

@@ -37,7 +37,7 @@ public class ClientEntity {
     private String middleName;
 
     @Column(name = "birth_date")
-    private LocalDateTime birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "email")
     private String email;
